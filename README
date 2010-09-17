@@ -1,0 +1,25 @@
+CAS: A toy computer algebra system
+============
+
+Features:
+
+Currently, CAS can differentiate and plot symbolic expressions (e.g., x^2,
+sin(x), etc.). Beyond the usual algebraic expressions, CAS knows about the
+basic trigonometric (sin, cos, tan)  and exponential (exp) functions.
+
+Please bear in mind that CAS is a work in progress -- there will be some bugs,
+and it isn't feature-complete. However, it will improve with time.
+
+Usage:
+
+Note: To use CAS, you will need Python 3 and gnuplot.
+Here is a usage example:
+
+     from cas import *
+     
+     f = Expr('sin(x)')
+     print(f)
+     f.plot(title='Sine', labels=('x', 'sin(x)'), range=((0,6.28), (-1,1)))
+     
+     print(f.d('x'))
+     f.d('x').plot(title='Cosine', range=((0,6.28), (-1,1)))
