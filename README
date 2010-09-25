@@ -3,8 +3,9 @@ CAS: A toy computer algebra system
 
 Features:
 
-Currently, CAS can differentiate and plot symbolic expressions (e.g., x^2,
-sin(x), etc.). Beyond the usual algebraic expressions, CAS knows about the
+CAS can differentiate and plot many symbolic expressions (e.g., x^2,
+sin(x), etc.) and integrate a few (namely, polynomials and the three basic trig
+functions). The differentiator knows about algebraic expressions, plus the
 basic trigonometric (sin, cos, tan)  and exponential (exp) functions.
 
 Please bear in mind that CAS is a work in progress -- there will be some bugs,
@@ -23,3 +24,6 @@ Here is a usage example:
      
      print(f.d('x'))
      f.d('x').plot(title='Cosine', range=((0,6.28), (-1,1)))
+     
+     print(f.integrate('x'))
+     f.integrate('x').plot(title='Negative Cosine', range=((0,6.28), (-1, 1)))

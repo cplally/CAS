@@ -289,6 +289,11 @@ class Func(Name):
     def __init__(self, token_string):
         Name.__init__(self, token_string)
 
+class Transform(Name):
+    '''Transform token; used to represent integrals that CAS cannot evaluate.'''
+    def __init__(self, token_string=''):
+        Name.__init__(self, token_string)
+
 class ParseTree(Token):
     '''
     ParseTree

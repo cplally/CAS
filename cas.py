@@ -1,6 +1,7 @@
 import differentiation
 import integration
-from parser import Parser, ParseTree, Operators, relative_precedence
+from parser import Parser, ParseTree, Operators, relative_precedence,\
+    Func, Transform, MinusOp
 
 from fractions import Fraction
 import os
@@ -26,11 +27,8 @@ class Expr():
         '''
         Integrate the expression with respect to var; used in similar fashion as
         d.
-        
-        NOTE: Not implemented, yet.
         '''
-        pass
-        #return integration.integrate(self, var)
+        return Expr(expr_tree=integration.integrate(self.tree_repr, var))
     
     def plot(self, title=None, labels=None, range=None):
         '''
@@ -130,11 +128,16 @@ class Expr():
             if not isinstance(expr, ParseTree):
                 return ['%s' % expr.value]
             else:
-                if expr.right:
-                    return parenthesizer(expr)
-                else:
+                if isinstance(expr.root, Func):
                     return [expr.root.value] + ['('] + converter(expr.left) +\
                         [')']
+                elif isinstance(expr.root, Transform):
+                    return [expr.root.value] + ['['] + converter(expr.left) +\
+                        [', '] + converter(expr.right) + [']']
+                elif isinstance(expr.root, MinusOp):
+                    return [expr.root.value] + converter(expr.left)
+                elif expr.right:
+                    return parenthesizer(expr)
         
         return converter(self.tree_repr)
     
